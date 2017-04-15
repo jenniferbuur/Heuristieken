@@ -1,24 +1,65 @@
+import operator
 
-dictionary = {}
+cargolist = {}
 spacecrafts = {}
-## spacecrafts
-spacecrafts[1] = [2000, 18.9]
-spacecrafts[2] = [2300, 13.1]
-spacecrafts[3] = [2400, 7.6]
-spacecrafts[4] = [5200, 14]
-spacecrafts[5] = [6500, 15]
-spacecrafts[6] = [3400, 42]
 
-## insert data into dictionary
-with open('/Users/jenniferbuur1/Documents/universiteit/UvAAEO/MinorProgrammeren/Heuristieken/Heuristieken/CargoLists/CargoList1.txt', 'rU') as f:
+## initiate spacecrafts
+spacecrafts['Cygnus'] = [2000, 18.9]
+spacecrafts['Verne'] = [2300, 13.1]
+spacecrafts['Progress'] = [2400, 7.6]
+spacecrafts['Kounotori'] = [5200, 14]
+##spacecrafts['TianZhou'] = [6500, 15]
+##spacecrafts['Dragon'] = [3400, 42]
+
+## insert data into cargolist dictionary
+with open('/Users/sem/Documents/Heuristieken/CargoLists/CargoList1.txt', 'rU') as f:
     for line in f:
             split = line.split()
             if len(split) == 3:
                 split[2] = split[2].replace(",", ".")
-                dictionary[split[0]] = [float(split[1]), float(split[2])]
+                cargolist[split[0]] = [float(split[1]), float(split[2])]
 
-for key in dictionary:
-    ratio = dictionary[key][0]/dictionary[key][1]
-    dictionary[key].append(ratio)
+## add ratios to cargolist
+for key in cargolist:
+    ratio = cargolist[key][0]/cargolist[key][1]
+    cargolist[key].append(ratio)
 
-print(dictionary)
+## add ratios to spacecrafts
+for key in spacecrafts:
+    ratio = spacecrafts[key][0]/spacecrafts[key][1]
+    spacecrafts[key].append(ratio)
+
+cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[1][2])
+spacecrafts_sorted = sorted(spacecrafts.items(), key=lambda i: i[1][2])
+##print(cargolist_sorted)
+##print(spacecrafts_sorted)
+
+## initiate max. values for first spacecraft
+spacecraft_kg = spacecrafts_sorted[0][1][0]
+spacecraft_m3 = spacecrafts_sorted[0][1][1]
+spacecraft_ratio = spacecrafts_sorted[0][1][2]
+print("Available KG: " + str(spacecraft_kg))
+print("Available M3: " + str(spacecraft_m3))
+print("Ratio: " + str(spacecraft_ratio))
+
+## create empty spacecraft
+cargo_kg = 0
+cargo_m3 = 0
+counter = 0
+cargos = []
+
+## add items from cargolist untill one of spacecraft limits is reached
+while (cargo_kg + cargolist_sorted[counter+1][1][0] < spacecraft_kg + cargolist_sorted[counter+1][1][1] and cargo_m3 < spacecraft_m3):
+    counter += 1
+    cargo_kg = cargo_kg + cargolist_sorted[counter][1][0]
+    cargo_m3 = cargo_m3 + cargolist_sorted[counter][1][1]
+    cargos.append(cargolist_sorted[counter][0])
+
+## print results of filled spacecraft
+if cargo_kg / cargo_m3 > spacecraft_ratio:
+    highlow = "higher"
+else:
+    highlow = "lower"
+print("Your first Spacecraft is filled with " + str(counter) + " cargos. "  + "The total Weight is: " + str(cargo_kg) + "KG. The total volume is: " + str(cargo_m3) + " M3")
+print("The following cargos are packed: " + str(cargos))
+print("The ratio KG/M3 of this filled spacecraft is: " + str(cargo_kg / cargo_m3) + " This ratio is " + highlow + " then the spacecrafts ratio: " + str(spacecraft_ratio))
