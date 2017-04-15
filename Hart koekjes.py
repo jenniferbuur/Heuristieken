@@ -29,37 +29,43 @@ for key in spacecrafts:
     ratio = spacecrafts[key][0]/spacecrafts[key][1]
     spacecrafts[key].append(ratio)
 
-cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[1][2])
-spacecrafts_sorted = sorted(spacecrafts.items(), key=lambda i: i[1][2])
-##print(cargolist_sorted)
-##print(spacecrafts_sorted)
+for spacecraft in range (len(spacecrafts)):
 
-## initiate max. values for first spacecraft
-spacecraft_kg = spacecrafts_sorted[0][1][0]
-spacecraft_m3 = spacecrafts_sorted[0][1][1]
-spacecraft_ratio = spacecrafts_sorted[0][1][2]
-print("Available KG: " + str(spacecraft_kg))
-print("Available M3: " + str(spacecraft_m3))
-print("Ratio: " + str(spacecraft_ratio))
+    cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[1][2])
+    spacecrafts_sorted = sorted(spacecrafts.items(), key=lambda i: i[1][2])
+    ##print(cargolist_sorted)
+    ##print(spacecrafts_sorted)
 
-## create empty spacecraft
-cargo_kg = 0
-cargo_m3 = 0
-counter = 0
-cargos = []
+    ## initiate max. values for spacecraft
+    spacecraft_kg = spacecrafts_sorted[spacecraft][1][0]
+    spacecraft_m3 = spacecrafts_sorted[spacecraft][1][1]
+    spacecraft_ratio = spacecrafts_sorted[spacecraft][1][2]
+    print("Spacecraft: " + str(spacecrafts_sorted[spacecraft][0]))
+    print("Available KG: " + str(spacecraft_kg))
+    print("Available M3: " + str(spacecraft_m3))
+    print("Ratio: " + str(spacecraft_ratio))
 
-## add items from cargolist untill one of spacecraft limits is reached
-while (cargo_kg + cargolist_sorted[counter+1][1][0] < spacecraft_kg + cargolist_sorted[counter+1][1][1] and cargo_m3 < spacecraft_m3):
-    counter += 1
-    cargo_kg = cargo_kg + cargolist_sorted[counter][1][0]
-    cargo_m3 = cargo_m3 + cargolist_sorted[counter][1][1]
-    cargos.append(cargolist_sorted[counter][0])
+    ## create empty spacecraft
+    cargo_kg = 0
+    cargo_m3 = 0
+    counter = 0
+    cargos = []
 
-## print results of filled spacecraft
-if cargo_kg / cargo_m3 > spacecraft_ratio:
-    highlow = "higher"
-else:
-    highlow = "lower"
-print("Your first Spacecraft is filled with " + str(counter) + " cargos. "  + "The total Weight is: " + str(cargo_kg) + "KG. The total volume is: " + str(cargo_m3) + " M3")
-print("The following cargos are packed: " + str(cargos))
-print("The ratio KG/M3 of this filled spacecraft is: " + str(cargo_kg / cargo_m3) + " This ratio is " + highlow + " then the spacecrafts ratio: " + str(spacecraft_ratio))
+    ## add items from cargolist untill one of spacecraft limits is reached
+    while (cargo_kg + cargolist_sorted[counter+1][1][0] < spacecraft_kg and cargo_m3 + cargolist_sorted[counter+1][1][1] < spacecraft_m3):
+        cargos.append(cargolist_sorted[counter][0])
+        cargo_kg = cargo_kg + cargolist_sorted[counter][1][0]
+        cargo_m3 = cargo_m3 + cargolist_sorted[counter][1][1]
+        counter += 1
+
+    ## print results of filled spacecraft
+    if cargo_kg / cargo_m3 > spacecraft_ratio:
+        print_advice = ['higher', 'high', 'lower']
+    else:
+        print_advice = ['lower', 'low', 'higher']
+    print("Your Spacecraft is filled with " + str(counter) + " cargos. "  + "The total Weight is: " + str(cargo_kg) + "KG. The total volume is: " + str(cargo_m3) + " M3")
+    print("The following cargos are packed: " + str(cargos))
+    print("The ratio KG/M3 of this filled spacecraft is: " + str(cargo_kg / cargo_m3) + " This ratio is " + print_advice[0] + " then the spacecrafts ratio: " + str(spacecraft_ratio) + ". It is recommended to remove cargos with a " + print_advice[1] + " ratio and add cargos with a " + print_advice[2] + " ratio, to optimize usage of space/weight.")
+
+    for placedcargos in cargos:
+        cargolist.pop(placedcargos, None)
