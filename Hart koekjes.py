@@ -29,12 +29,10 @@ for key in spacecrafts:
     ratio = spacecrafts[key][0]/spacecrafts[key][1]
     spacecrafts[key].append(ratio)
 
+## sort cargolist and spacecrafts by ratio
 for spacecraft in range (len(spacecrafts)):
-
     cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[1][2])
     spacecrafts_sorted = sorted(spacecrafts.items(), key=lambda i: i[1][2])
-    ##print(cargolist_sorted)
-    ##print(spacecrafts_sorted)
 
     ## initiate max. values for spacecraft
     spacecraft_kg = spacecrafts_sorted[spacecraft][1][0]
@@ -45,7 +43,7 @@ for spacecraft in range (len(spacecrafts)):
     print("Available M3: " + str(spacecraft_m3))
     print("Ratio: " + str(spacecraft_ratio))
 
-    ## create empty spacecraft
+    ## initiate empty spacecraft
     cargo_kg = 0
     cargo_m3 = 0
     counter = 0
@@ -63,9 +61,14 @@ for spacecraft in range (len(spacecrafts)):
         print_advice = ['higher', 'high', 'lower']
     else:
         print_advice = ['lower', 'low', 'higher']
-    print("Your Spacecraft is filled with " + str(counter) + " cargos. "  + "The total Weight is: " + str(cargo_kg) + "KG. The total volume is: " + str(cargo_m3) + " M3")
+    print("Spacecraft " + str(spacecrafts_sorted[spacecraft][0]) + " is filled with " + str(counter) + " cargos. "  + "The total Weight is: " + str(cargo_kg) + "KG. The total volume is: " + str(cargo_m3) + " M3")
     print("The following cargos are packed: " + str(cargos))
     print("The ratio KG/M3 of this filled spacecraft is: " + str(cargo_kg / cargo_m3) + " This ratio is " + print_advice[0] + " then the spacecrafts ratio: " + str(spacecraft_ratio) + ". It is recommended to remove cargos with a " + print_advice[1] + " ratio and add cargos with a " + print_advice[2] + " ratio, to optimize usage of space/weight.")
 
+    ## remove cargos from cargolist when used
     for placedcargos in cargos:
         cargolist.pop(placedcargos, None)
+
+print("Cargos left:")
+for key, value in cargolist.items():
+    print (key, value)
