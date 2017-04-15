@@ -69,6 +69,7 @@ for spacecraft in range (len(spacecrafts)):
     for placedcargos in cargos:
         cargolist.pop(placedcargos, None)
 
+## print cargolist that is not laoded into spacecraft
 print("Cargos left:")
 for key, value in cargolist.items():
     print (key, value)
