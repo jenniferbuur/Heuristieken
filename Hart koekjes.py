@@ -34,8 +34,10 @@ total_cargo_kg = 0
 total_cargo_m3 = 0
 total_counter = 0
 
-## sort cargolist and spacecrafts by ratio
+## loop over all spacecrafts
 for spacecraft in range (len(spacecrafts)):
+
+    ## sort cargolist and spacecrafts by ratio
     cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[1][2])
     spacecrafts_sorted = sorted(spacecrafts.items(), key=lambda i: i[1][2])
 
@@ -55,7 +57,7 @@ for spacecraft in range (len(spacecrafts)):
     cargos = []
 
     ## add items from cargolist untill one of spacecraft limits is reached
-    while (cargo_kg + cargolist_sorted[counter+1][1][0] < spacecraft_kg and cargo_m3 + cargolist_sorted[counter+1][1][1] < spacecraft_m3):
+    while (cargo_kg + cargolist_sorted[counter][1][0] < spacecraft_kg and cargo_m3 + cargolist_sorted[counter][1][1] < spacecraft_m3):
         cargos.append(cargolist_sorted[counter][0])
         cargo_kg = cargo_kg + cargolist_sorted[counter][1][0]
         cargo_m3 = cargo_m3 + cargolist_sorted[counter][1][1]
@@ -70,9 +72,11 @@ for spacecraft in range (len(spacecrafts)):
     print("The following cargos are packed: " + str(cargos))
     print("The ratio KG/M3 of this filled spacecraft is: " + str(cargo_kg / cargo_m3) + " This ratio is " + print_advice[0] + " then the spacecrafts ratio: " + str(spacecraft_ratio) + ". It is recommended to remove cargos with a " + print_advice[1] + " ratio and add cargos with a " + print_advice[2] + " ratio, to optimize usage of space/weight.")
 
+    # sum packed cargos to total packed cargos
     total_cargo_kg += cargo_kg
     total_cargo_m3 += cargo_m3
     total_counter += counter
+
     ## remove cargos from cargolist when used
     for placedcargos in cargos:
         cargolist.pop(placedcargos, None)
