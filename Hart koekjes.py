@@ -57,7 +57,7 @@ for spacecraft in range (len(spacecrafts)):
     cargos = []
 
     ## add items from cargolist untill one of spacecraft limits is reached
-    while (cargo_kg + cargolist_sorted[counter][1][0] < spacecraft_kg and cargo_m3 + cargolist_sorted[counter][1][1] < spacecraft_m3):
+    while cargo_kg + cargolist_sorted[counter][1][0] < spacecraft_kg and cargo_m3 + cargolist_sorted[counter][1][1] < spacecraft_m3:
         cargos.append(cargolist_sorted[counter][0])
         cargo_kg = cargo_kg + cargolist_sorted[counter][1][0]
         cargo_m3 = cargo_m3 + cargolist_sorted[counter][1][1]
@@ -82,9 +82,9 @@ for spacecraft in range (len(spacecrafts)):
         cargolist.pop(placedcargos, None)
 
 ## print list of cargos which are not loaded into spacecraft
-print("Cargos left:")
-for key, value in cargolist.items():
-    print (key, value)
+cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[1][2])
+print("Cargos left:" + str(cargolist_sorted))
+
 print ("Total KG: " + str(total_cargo_kg))
 print("Total M3: " + str(total_cargo_m3))
 print("Total Cargos: " + str(total_counter))
