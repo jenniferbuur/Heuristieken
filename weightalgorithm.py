@@ -42,7 +42,6 @@ for key in spacecrafts:
 
 print(names)
 
-possibilities = itertools.permutations(names)
 loadingsheme = {}
 lastitem = 0
 weightwasted = []
@@ -54,6 +53,7 @@ minimal = 1000
 print('point reached 1')
 
 for x in itertools.permutations(names):
+    print(x)
     wastedweight = []
     for i in range(0,len(x)):
         wastedweight.append(spacecrafts[x[i]][0])
@@ -69,8 +69,10 @@ for x in itertools.permutations(names):
                     wastedweight[spacecraft] -= cargolist[sortedweight[cargoitem]][weight]
                     leftbehind -= 1
                 else:
-                    lastitem = item
+                    lastitem = item + 1
                     break
+        if lastitem == items:
+            break
     for i in range(0,len(x)):
         print('Spacecraft ' + str(x[i]) + ' must be filled with cargos: ' + str(loadingsheme[i+1]) + '.')
         print('Therefore ' + str(wastedweight[i]) + ' kilos are wasted.')

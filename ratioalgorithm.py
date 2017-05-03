@@ -62,6 +62,7 @@ for name in spacecrafts:
     loadeditems += spacecrafts[name][cargocount]
 
 unloadeditems = items - loadeditems
+
 print(wastedweight)
 print(wastedspace)
 print(str(unloadeditems) + ' items are not loaded on the spacecrafts.')
