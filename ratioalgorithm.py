@@ -17,13 +17,13 @@ items = 0; weight = 0; space = 1; ratio = 2; cargocount = 3; av_ratio = 4
 ## insert data into dictionary
 with open('/Users/jenniferbuur1/Documents/universiteit/UvAAEO/MinorProgrammeren/Heuristieken/Heuristieken/CargoLists/CargoList1.txt', 'rU') as f:
     for line in f:
-            split = line.split()
-            key = split[0][4:]
-            if len(split) == 3:
-                split[2] = split[2].replace(",", ".")
-                cargolist[key] = [float(split[1]), float(split[2])]
-                cargolist[key].append(cargolist[key][weight]/cargolist[key][space])
-                items += 1
+        split = line.split()
+        key = split[0][4:]
+        if len(split) == 3:
+            split[2] = split[2].replace(",", ".")
+            cargolist[key] = [float(split[1]), float(split[2])]
+            cargolist[key].append(cargolist[key][weight]/cargolist[key][space])
+            items += 1
 
 wastedweight = {}; wastedspace = {}
 
