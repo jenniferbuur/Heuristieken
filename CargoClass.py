@@ -10,7 +10,6 @@ class Cargo(self):
     def load_cargo(self, cargo_nr):
         cargolist.append(cargo_nr)
 
-
     def sort_by_weight(self, cargolist):
         sorted(cargolist, key = lambda x: [cargolist[x][weight]])
 

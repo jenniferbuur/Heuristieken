@@ -6,4 +6,6 @@ class Spacecrafts(self):
         self.volume = volume
         self.density = weight/float(volume)
 
-    
+# moeten we hier nou die algoritmes ook in zetten?
+
+#    def load_spacecrafts(self, cargolist):
