@@ -1,9 +1,9 @@
-class Cargo(self):
+class CargoClass(object):
 
     def __init__(self, weight, volume, cargo_id):
         self.weight = weight
-        self.volume = volume.replace(",". ".")
-        self.cargo_id = cargo_id #nodig?
+        self.volume = volume.replace(",", ".")
+        self.cargo_id = cargo_id
         self.density = weight/float(volume)
         self.cargolist = []
 
@@ -13,7 +13,7 @@ class Cargo(self):
     def sort_by_weight(self, cargolist):
         sorted(cargolist, key = lambda x: [cargolist[x][weight]])
 
-    def sort_by_desnity(self. cargolist):
+    def sort_by_desnity(self, cargolist):
         sorted(cargolist, key = lambda x: [cargolist[x][ratio]])
 
     def return_loaded_cargo(self):
