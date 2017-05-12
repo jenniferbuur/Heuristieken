@@ -1,16 +1,16 @@
-
 import itertools
+import Spacecrafts as sc
 
 cargolist = {}
 spacecrafts = {}
 
 ## spacecrafts
-spacecrafts['Cygnus'] = [2000, 18.9]
-spacecrafts['Verne'] = [2300, 13.1]
-spacecrafts['Progress'] = [2400, 7.6]
-spacecrafts['Kounotori'] = [5200, 14]
-## spacecrafts['TianZhou'] = [6500, 15]
-## spacecrafts['Dragon'] = [3400, 42]
+cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9)
+verne = sc.Spacecrafts("Verne", 2300, 13.1)
+progress = sc.Spacecrafts("Progress", 2400, 7.6)
+kounotori = sc.Spacecrafts("Kounotori", 5200, 14)
+tianzhou = sc.Spacecrafts("TianZhou", 6500, 15)
+dragon = sc.Spacecrafts("Dragon", 3400, 42)
 
 ## initiate variables
 items = 0; weight = 0; space = 1; ratio = 2
