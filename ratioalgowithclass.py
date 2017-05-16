@@ -7,15 +7,15 @@ cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9)
 verne = sc.Spacecrafts("Verne", 2300, 13.1)
 progress = sc.Spacecrafts("Progress", 2400, 7.6)
 kounotori = sc.Spacecrafts("Kounotori", 5200, 14)
-tianzhou = sc.Spacecrafts("TianZhou", 6500, 15)
-dragon = sc.Spacecrafts("Dragon", 3400, 42)
+# tianzhou = sc.Spacecrafts("TianZhou", 6500, 15)
+# dragon = sc.Spacecrafts("Dragon", 3400, 42)
 
 ## initiate variables
 items = 0; weight = 0; space = 1; ratio = 2; cargocount = 3; av_ratio = 4
 cargolist = {}
 
-## insert data into dictionary
-with open('CargoLists/CargoList3.txt', 'rU') as f:
+## insert cargo data into dictionary
+with open('CargoLists/CargoList1.txt', 'rU') as f:
     for line in f:
         split = line.split()
         key = split[0][4:]
@@ -26,6 +26,7 @@ with open('CargoLists/CargoList3.txt', 'rU') as f:
             items += 1
 
 spacecrafts = [cygnus, verne, progress, kounotori]
+
 ## fill spacecrafts with cargo by putting item in spacecrafts with the same ratio as the average ratio of the cargo together
 for item in range(1, items + 1):
     best = 10000
