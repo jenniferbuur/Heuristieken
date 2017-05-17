@@ -9,7 +9,7 @@ items = 0; weight = 0; space = 1; ratio = 2; cargocount = 3; av_ratio = 4; bests
 cargolist = {}
 
 ## insert data into dictionary
-with open('CargoLists/CargoList2.txt', 'rU') as f:
+with open('CargoLists/CargoList1.txt', 'rU') as f:
     for line in f:
         split = line.split()
         key = split[0][4:]
@@ -19,7 +19,7 @@ with open('CargoLists/CargoList2.txt', 'rU') as f:
             cargolist[int(key)].append(cargolist[int(key)][weight]/cargolist[int(key)][space])
             items += 1
 
-for bruteforce in range(0, 100000):
+for bruteforce in range(0, 100000000):
     # initialise spacecrafts in class
     cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9)
     verne = sc.Spacecrafts("Verne", 2300, 13.1)

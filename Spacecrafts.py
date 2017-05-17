@@ -27,6 +27,13 @@ class Spacecrafts(object):
         self.wastedspace -= cargospace
         self.cargolist.append(cargo_id)
 
+    def set_original(self):
+        self.cargocount = 0
+        self.meancargoratio = 0
+        self.wastedweight = self.weight
+        self.wastedspace = self.volume
+        self.cargolist = []
+
     # def best_craft(self, craft, cargoratio):
     #     diff = abs(self.density - (self.cargocount * self.meancargoratio + cargoratio) / (self.cargocount + 1)
     #     return diff

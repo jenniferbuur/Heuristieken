@@ -15,6 +15,7 @@ items = 0; weight = 0; space = 1; ratio = 2; cargocount = 3; av_ratio = 4
 cargolist = {}
 
 ## insert cargo data into dictionary
+## insert data into dictionary
 with open('CargoLists/CargoList1.txt', 'rU') as f:
     for line in f:
         split = line.split()
@@ -26,21 +27,24 @@ with open('CargoLists/CargoList1.txt', 'rU') as f:
             items += 1
 
 spacecrafts = [cygnus, verne, progress, kounotori]
+sortedratio = sorted(cargolist, key = lambda x: [cargolist[x][ratio]])
+
 
 ## fill spacecrafts with cargo by putting item in spacecrafts with the same ratio as the average ratio of the cargo together
 for item in range(1, items + 1):
+    sortedcargo = sortedratio[item - 1]
     best = 10000
     reminder = 0
     bestspacecraft = ''
     for craft in spacecrafts:
-        if craft.check_craft(cargolist[str(item)][weight], cargolist[str(item)][space]):
+        if craft.check_craft(cargolist[sortedcargo][weight], cargolist[sortedcargo][space]):
             reminder = 1
-            diff = abs(craft.density - (craft.cargocount * craft.meancargoratio + cargolist[str(item)][ratio])/(craft.cargocount+1))
+            diff = abs(craft.density - (craft.cargocount * craft.meancargoratio + cargolist[sortedcargo][ratio])/(craft.cargocount+1))
             if diff < best:
                 best = diff
                 bestspacecraft = craft
     if reminder == 1:
-        bestspacecraft.load_cargo(cargolist[str(item)][ratio], cargolist[str(item)][weight], cargolist[str(item)][space], item)
+        bestspacecraft.load_cargo(cargolist[sortedcargo][ratio], cargolist[sortedcargo][weight], cargolist[sortedcargo][space], sortedcargo)
 
 totalwastedweight = 0; totalwastedspace = 0; loadeditems = 0
 
