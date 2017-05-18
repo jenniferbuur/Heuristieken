@@ -36,12 +36,11 @@ spacecrafts = [cygnus, verne, progress, kounotori]
 best = 10000
 
 for crafts in itertools.permutations(spacecrafts):
-    wastedweight = []; lastitem = 0
+    wastedweight = []
     for craft in crafts:
         wastedweight.append(craft.weight)
     for item in sortedweight:
         name = 0
-        # sortedcargo = sortedweight[item]
         if cargolist[item][weight] > max(wastedweight):
             break
         for craft in crafts:
