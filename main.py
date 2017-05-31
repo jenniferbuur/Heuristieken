@@ -7,7 +7,10 @@ import random
 # alle lists inladen
 # importeer alle classes
 
+<<<<<<< Updated upstream
 # alle cargolists in een dictionary
+=======
+>>>>>>> Stashed changes
 weight = 0; space = 1; ratio = 2;
 
 # initialise spacecrafts in class
@@ -109,8 +112,11 @@ for bruteforce in range(0, 10000):
 # with this every country has to send an equal amount with a maximum difference of 1
 cygnus = []; verne = []; progress = []; kounotori = []; tianzhou = []; dragon = []
 packed_cargo = []; speed = 1000; number_of_sc = 0
+<<<<<<< Updated upstream
 
 # load cargolist
+=======
+>>>>>>> Stashed changes
 cargolist = helpers.importlist(3); items = len(cargolist.keys())
 
 
@@ -146,7 +152,10 @@ for cycle in range(0, 100):
     randomlist = shortened.keys()
     all_spacecrafts = [cygnus[cycle], verne[cycle], progress[cycle], kounotori[cycle], tianzhou[cycle], dragon[cycle]]
 
+<<<<<<< Updated upstream
     # if the last cycle has been reached, change spacecrafts
+=======
+>>>>>>> Stashed changes
     if len(shortened) == len(cargolist):
         last_weight = 0; last_space = 0;
         for item in optimized:
@@ -239,8 +248,6 @@ for cycle in range(0, 100):
         if score[0] < bestscore:
             bestscore = score[0]
             packed_cargo = []
-            # print('#: ' + str(bruteforce) + ', Score: ' + str(score[0]))
-            # print('Wasted weight: ' + str(score[1]) + ', Wasted space: ' + str(score[2]) + '.')
             for craft in spacecrafts:
                 packed_cargo.extend(craft.cargolist)
 
