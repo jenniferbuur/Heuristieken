@@ -15,7 +15,7 @@ spacecrafts['Kounotori'] = [5200, 14]
 items = 0; weight = 0; space = 1; ratio = 2; cargocount = 3; av_ratio = 4
 
 ## insert data into dictionary
-with open('CargoLists/CargoList2.txt', 'rU') as f:
+with open('CargoLists/CargoList1.txt', 'rU') as f:
     for line in f:
         split = line.split()
         key = split[0][4:]

@@ -1,10 +1,36 @@
+# alle functies naar helpers oid verplaatsen!!!!!!!!
+
 import itertools
 import Spacecrafts as sc
-import helpers
+import helpers as helpers
 import random
 # alle lists inladen
 # importeer alle classes
 
+<<<<<<< Updated upstream
+=======
+# alle cargolists in een dictionary
+cargolist1 = {}; cargolist2 = {}; cargolist3 = {}
+lists = [cargolist1, cargolist2, cargolist3]
+nritems = [0, 0, 0]
+weight = 0; space = 1; ratio = 2;
+
+# open the cargolists and replace the comma with a period and puts it in dictionaries for each cargolist
+# deze ook naar helpers?
+for i in range(1,4):
+    with open('CargoLists/CargoList' + str(i) + '.txt', 'rU') as f:
+        for line in f:
+            split = line.split()
+            key = split[0][4:]
+            if len(split) == 3:
+                split[2] = split[2].replace(",", ".")
+                lists[i-1][key] = [float(split[1]), float(split[2])]
+                lists[i-1][key].append(lists[i-1][key][weight]/lists[i-1][key][space])
+                nritems[i-1] += 1
+
+items1 = nritems[0]; items2 = nritems[1]; items3 = nritems[2]
+
+>>>>>>> Stashed changes
 # initialise spacecrafts in class
 cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9)
 verne = sc.Spacecrafts("Verne", 2300, 13.1)
@@ -42,7 +68,13 @@ print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1
 # partly brute force on shortened cargolist
 optimized = helpers.optimize(cargolist, spacecrafts)
 bestscore = 10000
+<<<<<<< Updated upstream
 for bruteforce in range(0, 1):
+=======
+# eventueel functie van maken in algoritmes zodat je geen for loops meer hebt in main
+# want is eigenlijk een algoritme
+for bruteforce in range(0, 100000):
+>>>>>>> Stashed changes
     randomlist = optimized.keys()
     random.shuffle(randomlist)
     helpers.ratio(optimized, randomlist, spacecrafts)

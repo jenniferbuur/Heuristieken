@@ -57,8 +57,8 @@ for cargoloop in range(0,20):
     cargolist_sorted = sorted(cargolist.items(), key=lambda i: i[space][ratio], reverse = True)
     random.shuffle(cargolist_sorted)
 
-    # Theoratically we can fill the cargos with a max. weight of max_weight and max. space of max_space.
-    # Based on this information we setup an optimized cargolist to reduce our 'random time'
+    # Theoratically we can fill the cargos with a maximum weight of max_weight and maximum space of max_space.
+    # Based on this information we set up an optimized cargolist to reduce our 'random time'.
     max_weight = 2300 + 2400+ 5200 + 6500 + 3400
     max_space = 13.1 + 7.6+ 14 + 15 + 42
     optimized_cargolist = {}
@@ -82,7 +82,7 @@ for cargoloop in range(0,20):
         print(last_cargos_space)
         print(last_cargos_weight)
 
-    print('We try to use put all the following cargos in the Spacecrafts: ' + str(optimized_cargolist))
+    print('We tried to put all the following cargos in the Spacecrafts: ' + str(optimized_cargolist))
 
     ## Start brute force and try to fit the optimized list as good as possible in the Spacecrafts
     for bruteforce in range(0, speed):

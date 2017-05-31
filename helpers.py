@@ -79,6 +79,7 @@ def optimize(cargolist, spacecrafts):
             total_cargospace += cargolist[item][1]
     return optimizedlist
 
+<<<<<<< Updated upstream
 def shorten(cargolist, spacecrafts):
     randomlist = cargolist.keys()
     random.shuffle(randomlist)
@@ -113,3 +114,18 @@ def spacecrafts(last_weight, last_space, spacecrafts):
     else:
         spacecrafts = [spacecrafts[1], spacecrafts[2], spacecrafts[3], spacecrafts[4], spacecrafts[5]]
     return spacecrafts
+=======
+def political(cargolist, keyslist, spacecrafts):
+    for item in keyslist:
+        best = ''; best_fit = 10000; check = False
+        for craft in spacecrafts:
+            if craft.check_craft(cargolist[item][0], cargolist[item][1]):
+                check = True
+                diff = abs(craft.density - (craft.cargocount * craft.meancargoratio + cargolist[item][2])/(craft.cargocount+1))
+                if diff < best_fit:
+                    best_fit = diff
+                    best = craft
+        if check == True:
+            best.load_cargo(cargolist[item][2], cargolist[item][0], cargolist[item][1], item)
+    return
+>>>>>>> Stashed changes
