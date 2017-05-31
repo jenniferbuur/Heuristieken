@@ -1,5 +1,10 @@
 class Spacecrafts(object):
 
+    """
+    In this class the variables for the spacecrafts are initiated
+    and several functions that are neccessary for main.py
+    """
+
     def __init__(self, sc_id, weight, volume, country):
         self.sc_id =  sc_id
         self.weight = weight
@@ -12,15 +17,18 @@ class Spacecrafts(object):
         self.meancargoratio = 0
         self.cargolist = []
 
-    def __str__(self):
-        return self.sc_id + ", " + str(self.weight) + ", " + str(self.volume) + ", " + str(self.density)
-
+    """
+    This function checks whether a cargo item fits in an spacecraft
+    """
     def check_craft(self, cargoweight, cargospace):
         if cargoweight <= self.wastedweight and cargospace <= self.wastedspace:
             return True
         else:
             return False
 
+    """
+    This function loads a cargo item into an spacecraft
+    """
     def load_cargo(self, cargoratio, cargoweight, cargospace, cargo_id):
         self.cargocount += 1
         self.meancargoratio = self.density - (self.cargocount * self.meancargoratio + cargoratio) / (self.cargocount + 1)
@@ -28,6 +36,9 @@ class Spacecrafts(object):
         self.wastedspace -= cargospace
         self.cargolist.append(cargo_id)
 
+    """
+    This function sets the variables neccessary to the original state of init
+    """
     def set_original(self):
         self.cargocount = 0
         self.meancargoratio = 0

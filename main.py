@@ -1,14 +1,18 @@
-# alle functies naar helpers oid verplaatsen!!!!!!!!
-
+# import all classes and packages
 import itertools
 import Spacecrafts as sc
 import helpers as helpers
 import random
 import Spacemission as sm
-# alle lists inladen
-# importeer alle classes
 
-weight = 0; space = 1; ratio = 2;
+"""
+For exercise A, B, C always use lines 17 - 26
+For exercise A use lines 28 - 45
+For exercise B use lines 47 - 73
+For exercise C use lines 75 - 116
+For exercise D use lines 118 - 213
+For exercise E use lines 215 - 288
+"""
 
 # initialise spacecrafts in class
 cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9, "USA")
@@ -26,8 +30,8 @@ spacecrafts = [cygnus, verne, progress, kounotori]
 cargolist = helpers.importlist(1)
 items = len(cargolist.keys())
 best_weight = 10000
-#
-# # iterate over permutations
+
+# iterate over permutations
 for crafts in itertools.permutations(spacecrafts):
     helpers.weight(cargolist, crafts)
     solution = helpers.solution(crafts, items)
@@ -36,20 +40,21 @@ for crafts in itertools.permutations(spacecrafts):
         best_weight = solution[0]
         best_space = solution[1]
         best_items = solution[2]
-
+print('Best solution exercise A:')
 print('Wasted weight: ' + str(best_weight) + ', Wasted space: ' + str(best_space) + ', Unloaded cargo: ' + str(best_items) + '.')
+print('')
 
 # # opdracht B (Cargolist 1)
 # # loading cargo sorted by density
 sortedlist = sorted(cargolist, key = lambda x: [cargolist[x][2]])
 helpers.ratio(cargolist, sortedlist, spacecrafts)
 solution = helpers.solution(spacecrafts, items)
-print('The solution found by sorting the cargo by density is as follows:')
+print('The solution found by sorting the cargo by density for exercise B is as follows:')
 print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1]) + ', Unloaded cargo: ' + str(solution[2]) + '.')
 
 # # partly brute force on shortened cargolist
 optimized = helpers.optimize(cargolist, spacecrafts)
-bestscore = 10000
+bestscore = 10000, bestsolution = []
 
 for bruteforce in range(0, 100000):
     randomlist = optimized.keys()
@@ -61,49 +66,11 @@ for bruteforce in range(0, 100000):
     # remember best solution
     if score < bestscore:
         bestscore = score
-        print('#: ' + str(bruteforce) + ', Score: ' + str(score))
-        print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1]) + ', Unloaded cargo: ' + str(solution[2]) + '.')
-
-# # opdracht C (Cargolist 2)
-# # loading cargo sorted by weight
-cargolist = helpers.importlist(2)
-items = len(cargolist.keys())
-best_weight = 10000
-# iterate over permutations
-for crafts in itertools.permutations(spacecrafts):
-    helpers.weight(cargolist, crafts)
-    solution = helpers.solution(crafts, items)
-    # remember best solution
-    if solution[0] < best_weight:
-        best_weight = solution[0]
-        best_space = solution[1]
-        best_items = solution[2]
-
-print('Wasted weight: ' + str(best_weight) + ', Wasted space: ' + str(best_space) + ', Unloaded cargo: ' + str(best_items) + '.')
-
-# loading cargo sorted by density
-sortedlist = sorted(cargolist, key = lambda x: [cargolist[x][2]])
-helpers.ratio(cargolist, sortedlist, spacecrafts)
-solution = helpers.solution(spacecrafts, items)
-print('The solution found by sorting the cargo by density is as follows:')
-print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1]) + ', Unloaded cargo: ' + str(solution[2]) + '.')
-
-# partly brute force on shortened cargolist
-optimized = helpers.optimize(cargolist, spacecrafts)
-bestscore = 10000
-
-for bruteforce in range(0, 1):
-    randomlist = optimized.keys()
-    random.shuffle(randomlist)
-    helpers.ratio(optimized, randomlist, spacecrafts)
-    solution = helpers.solution(spacecrafts, items)
-    # score function
-    score = solution[0] + 0.01 * solution[2]
-    # remember best solution
-    if score < bestscore:
-        bestscore = score
-        print('#: ' + str(bruteforce) + ', Score: ' + str(score))
-        print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1]) + ', Unloaded cargo: ' + str(solution[2]) + '.')
+        bestsolution = solution
+print("Best solution exercise B:")
+print('Score: ' + str(bestscore))
+print('Wasted weight: ' + str(bestsolution[0]) + ', Wasted space: ' + str(bestsolution[1]) + ', Unloaded cargo: ' + str(bestsolution[2]) + '.')
+print('')
 
 # opdracht C (Cargolist 2)
 # loading cargo sorted by weight
@@ -119,20 +86,21 @@ for crafts in itertools.permutations(spacecrafts):
         best_weight = solution[0]
         best_space = solution[1]
         best_items = solution[2]
-
+print('Best solution exercise C weight:')
 print('Wasted weight: ' + str(best_weight) + ', Wasted space: ' + str(best_space) + ', Unloaded cargo: ' + str(best_items) + '.')
-
+print('')
 # loading cargo sorted by density
 sortedlist = sorted(cargolist, key = lambda x: [cargolist[x][2]])
 helpers.ratio(cargolist, sortedlist, spacecrafts)
 solution = helpers.solution(spacecrafts, items)
 print('The solution found by sorting the cargo by density is as follows:')
 print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1]) + ', Unloaded cargo: ' + str(solution[2]) + '.')
-
+print('')
 # partly brute force on shortened cargolist
 optimized = helpers.optimize(cargolist, spacecrafts)
-bestscore = 10000
-for bruteforce in range(0, 1):
+bestscore = 10000, bestsolution = []
+
+for bruteforce in range(0, 100000):
     randomlist = optimized.keys()
     random.shuffle(randomlist)
     helpers.ratio(optimized, randomlist, spacecrafts)
@@ -142,8 +110,10 @@ for bruteforce in range(0, 1):
     # remember best solution
     if score < bestscore:
         bestscore = score
-        print('#: ' + str(bruteforce) + ', Score: ' + str(score))
-        print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1]) + ', Unloaded cargo: ' + str(solution[2]) + '.')
+        bestsolution = solution
+print("Best solution exercise C weight and space:")
+print('Score: ' + str(bestscore))
+print('Wasted weight: ' + str(bestsolution[0]) + ', Wasted space: ' + str(bestsolution[1]) + ', Unloaded cargo: ' + str(bestsolution[2]) + '.')
 
 # opdracht D
 # loading a massive cargolist (3) into multiple spacecrafts
@@ -193,8 +163,8 @@ for cycle in range(0, 100):
     if len(shortened) == len(cargolist):
         last_weight = 0; last_space = 0; diff = []
         for item in optimized:
-            last_weight += optimized[item][weight]
-            last_space += optimized[item][space]
+            last_weight += optimized[item][0]
+            last_space += optimized[item][1]
         for country in countries:
             diff.append(country.count - count)
         if diff.count(0) == 5:
@@ -281,8 +251,8 @@ for cycle in range(0, 100):
     if len(optimized) == len(cargolist):
         last_weight = 0; last_space = 0;
         for item in optimized:
-            last_weight += optimized[item][weight]
-            last_space += optimized[item][space]
+            last_weight += optimized[item][0]
+            last_space += optimized[item][1]
         spacecrafts = helpers.spacecrafts(last_weight, last_space, all_spacecrafts)
 
     # remember all used spacecrafts

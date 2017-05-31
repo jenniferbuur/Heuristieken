@@ -2,6 +2,13 @@ import itertools
 import Spacecrafts as cs
 import random
 
+"""
+This file has several functions neccessary for main.py
+"""
+
+"""
+This function import a cargolist an puts it into a dictionary
+"""
 def importlist(number):
     cargolist = {}; items = 0
     with open('CargoLists/CargoList' + str(number) + '.txt', 'rU') as f:
@@ -14,6 +21,9 @@ def importlist(number):
                 cargolist[key].append(cargolist[key][0]/cargolist[key][1])
     return cargolist
 
+"""
+This function is the algorithm used to fill spacecrafts based on weight
+"""
 def weight(cargolist, spacecrafts):
     sortedlist = sorted(cargolist, key = lambda x: [cargolist[x][0]], reverse = True)
     wastedweight = []
@@ -32,6 +42,9 @@ def weight(cargolist, spacecrafts):
                 name += 1
     return
 
+"""
+This function is the algorithm used to fill spacecrafts based on weight and space
+"""
 def ratio(cargolist, keyslist, spacecrafts):
     for item in keyslist:
         best = ''; best_fit = 10000; check = False
@@ -46,6 +59,9 @@ def ratio(cargolist, keyslist, spacecrafts):
             best.load_cargo(cargolist[item][2], cargolist[item][0], cargolist[item][1], item)
     return
 
+"""
+This function determines the solution based on whats loaded into the spacecrafts
+"""
 def solution(spacecrafts, items):
     totalwastedweight = 0; totalwastedspace = 0; loadeditems = 0
     for craft in spacecrafts:
@@ -56,6 +72,10 @@ def solution(spacecrafts, items):
     unloadeditems = items - loadeditems
     return totalwastedweight, totalwastedspace, unloadeditems
 
+"""
+This function determines the score for exercises D and E
+and gives the solution based on whats loaded into the spacecrafts
+"""
 def score(spacecrafts, items):
     totalwastedweight = 0; totalwastedspace = 0; loadeditems = 0
     for craft in spacecrafts:
@@ -66,6 +86,11 @@ def score(spacecrafts, items):
     score = totalwastedweight * totalwastedspace
     return score, totalwastedweight, totalwastedspace, unloadeditems
 
+"""
+This function optimizes the list for exercises B and C based on density
+and return a dictionary with all items in the optimized list
+The optimized list filled from biggest density to smallest, hereby iterating over every item
+"""
 def optimize(cargolist, spacecrafts):
     sortedlist = sorted(cargolist, key=lambda x: [cargolist[x][2]], reverse = True)
     max_weight = 0; max_space = 0; optimizedlist = {}; total_cargospace = 0; total_cargoweight = 0
@@ -79,6 +104,11 @@ def optimize(cargolist, spacecrafts):
             total_cargospace += cargolist[item][1]
     return optimizedlist
 
+"""
+This function shortens the list for exercises D and E based on density
+and return a dictionary with all items in the shortened list
+The shortened list filled randomly, hereby iterating over every item
+"""
 def shorten(cargolist, spacecrafts):
     randomlist = cargolist.keys()
     random.shuffle(randomlist)
@@ -93,6 +123,10 @@ def shorten(cargolist, spacecrafts):
             total_cargospace += cargolist[item][1]
     return optimizedlist
 
+"""
+This function determines which spacecrafts to use when the lenght of the shortened list
+is equal to the items left, hereby minimalizing the number of spacecrafts used in D and E 
+"""
 def spacecrafts(last_weight, last_space, spacecrafts):
     if last_weight < spacecrafts[0].weight and last_space < spacecrafts[0].volume:
         spacecrafts = spacecrafts[0]
