@@ -4,22 +4,19 @@ import itertools
 import Spacecrafts as sc
 import helpers as helpers
 import random
+import Spacemission as sm
 # alle lists inladen
 # importeer alle classes
 
-<<<<<<< Updated upstream
-# alle cargolists in een dictionary
-=======
->>>>>>> Stashed changes
 weight = 0; space = 1; ratio = 2;
 
 # initialise spacecrafts in class
-cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9)
-verne = sc.Spacecrafts("Verne", 2300, 13.1)
-progress = sc.Spacecrafts("Progress", 2400, 7.6)
-kounotori = sc.Spacecrafts("Kounotori", 5200, 14)
-tianzhou = sc.Spacecrafts("TianZhou", 6500, 15)
-dragon = sc.Spacecrafts("Dragon", 3400, 42)
+cygnus = sc.Spacecrafts("Cygnus", 2000, 18.9, "USA")
+verne = sc.Spacecrafts("Verne", 2300, 13.1, "Europe")
+progress = sc.Spacecrafts("Progress", 2400, 7.6, "Russia")
+kounotori = sc.Spacecrafts("Kounotori", 5200, 14, "Japan")
+tianzhou = sc.Spacecrafts("TianZhou", 6500, 15, "China")
+dragon = sc.Spacecrafts("Dragon", 3400, 42, "USA")
 
 # initializing array with spacecrafts for A, B and C
 spacecrafts = [cygnus, verne, progress, kounotori]
@@ -54,7 +51,7 @@ print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1
 optimized = helpers.optimize(cargolist, spacecrafts)
 bestscore = 10000
 
-for bruteforce in range(0, 100000):
+for bruteforce in range(0, 1):
     randomlist = optimized.keys()
     random.shuffle(randomlist)
     helpers.ratio(optimized, randomlist, spacecrafts)
@@ -94,7 +91,7 @@ print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1
 # partly brute force on shortened cargolist
 optimized = helpers.optimize(cargolist, spacecrafts)
 bestscore = 10000
-for bruteforce in range(0, 10000):
+for bruteforce in range(0, 1):
     randomlist = optimized.keys()
     random.shuffle(randomlist)
     helpers.ratio(optimized, randomlist, spacecrafts)
@@ -111,26 +108,23 @@ for bruteforce in range(0, 10000):
 # loading a massive cargolist (3) into multiple spacecrafts
 # with this every country has to send an equal amount with a maximum difference of 1
 cygnus = []; verne = []; progress = []; kounotori = []; tianzhou = []; dragon = []
-packed_cargo = []; speed = 1000; number_of_sc = 0
-<<<<<<< Updated upstream
+packed_cargo = []; speed = 1000; used_spacecrafts = []; first_lastlist = False; count = 0
 
 # load cargolist
-=======
->>>>>>> Stashed changes
 cargolist = helpers.importlist(3); items = len(cargolist.keys())
-
+countries = [sm.Spacemission("USA"), sm.Spacemission("Europe"), sm.Spacemission("Russia"), sm.Spacemission("Japan"), sm.Spacemission("China")]
 
 for cycle in range(0, 100):
     print('Cycle: ' + str(cycle))
-    bestscore = 99999999
+    bestscore = 99999999;
 
     # make new spacecrafts for every new cycle
-    cygnus.append(sc.Spacecrafts("Cygnus", 2000, 18.9))
-    verne.append(sc.Spacecrafts("Verne", 2300, 13.1))
-    progress.append(sc.Spacecrafts("Progress", 2400, 7.6))
-    kounotori.append(sc.Spacecrafts("Kounotori", 5200, 14))
-    tianzhou.append(sc.Spacecrafts("TianZhou", 6500, 15))
-    dragon.append(sc.Spacecrafts("Dragon", 3400, 42))
+    cygnus.append(sc.Spacecrafts("Cygnus", 2000, 18.9, "USA"))
+    verne.append(sc.Spacecrafts("Verne", 2300, 13.1, "Europe"))
+    progress.append(sc.Spacecrafts("Progress", 2400, 7.6, "Russia"))
+    kounotori.append(sc.Spacecrafts("Kounotori", 5200, 14, "Japan"))
+    tianzhou.append(sc.Spacecrafts("TianZhou", 6500, 15, "China"))
+    dragon.append(sc.Spacecrafts("Dragon", 3400, 42, "USA"))
 
     # used spacecrafts for every cycle excluding the last cycle
     spacecrafts = [verne[cycle], progress[cycle], kounotori[cycle], tianzhou[cycle], dragon[cycle]]
@@ -143,7 +137,9 @@ for cycle in range(0, 100):
 
     # if there are no cargoitems left, break
     if len(cargolist) == 0:
-        print('The total number of spacecrafts is: ' + str(number_of_sc))
+        print('The total number of spacecrafts is: ' + str(len(used_spacecrafts)))
+        print(str(used_spacecrafts.count("Cygnus")) + ' of Cygnus, ' + str(used_spacecrafts.count("Verne")) + ' of Verne, ' + str(used_spacecrafts.count("Progress")) + ' of Progress,')
+        print(str(used_spacecrafts.count("Kounotori")) + ' of Kounotori, ' + str(used_spacecrafts.count("TianZhou")) + ' of TianZhou, ' + str(used_spacecrafts.count("Dragon")) + ' of Dragon.')
         print('')
         break
 
@@ -152,16 +148,33 @@ for cycle in range(0, 100):
     randomlist = shortened.keys()
     all_spacecrafts = [cygnus[cycle], verne[cycle], progress[cycle], kounotori[cycle], tianzhou[cycle], dragon[cycle]]
 
-<<<<<<< Updated upstream
     # if the last cycle has been reached, change spacecrafts
-=======
->>>>>>> Stashed changes
     if len(shortened) == len(cargolist):
-        last_weight = 0; last_space = 0;
+        last_weight = 0; last_space = 0; diff = []
         for item in optimized:
             last_weight += optimized[item][weight]
             last_space += optimized[item][space]
-        spacecrafts = helpers.spacecrafts(last_weight, last_space, all_spacecrafts)
+        for country in countries:
+            diff.append(country.count - count)
+        if diff.count(0) == 5:
+            spacecrafts = helpers.spacecrafts(last_weight, last_space, all_spacecrafts)
+        else:
+            for i in range(0, 5):
+                if diff[i] == 0:
+                    spacecrafts.remove(all_spacecrafts[i+1])
+
+    for craft in spacecrafts:
+        for spacemission in countries:
+            if spacemission.sm_id == craft.country:
+                spacemission.counter()
+    count += 1
+
+    # remember all used spacecrafts
+    if len(spacecrafts) == 1:
+        used_spacecrafts.append(spacecrafts.sc_id)
+    else:
+        for craft in spacecrafts:
+            used_spacecrafts.append(craft.sc_id)
 
     # start bruteforce
     for bruteforce in range(0, speed):
@@ -185,7 +198,6 @@ for cycle in range(0, 100):
             for craft in spacecrafts:
                 packed_cargo.extend(craft.cargolist)
 
-    number_of_sc += len(spacecrafts)
     print('The following cargo has been packed: ' + str(packed_cargo))
     print('')
 
@@ -193,7 +205,7 @@ for cycle in range(0, 100):
 # the last restriction doesn't matter any more
 
 cygnus = []; verne = []; progress = []; kounotori = []; tianzhou = []; dragon = []
-packed_cargo = []; speed = 1000; number_of_sc = 0
+packed_cargo = []; speed = 1000; number_of_sc = 0; used_spacecrafts = []
 cargolist = helpers.importlist(3); items = len(cargolist.keys())
 
 for cycle in range(0, 100):
@@ -201,12 +213,12 @@ for cycle in range(0, 100):
     bestscore = 99999999
 
     # make new spacecrafts for every new cycle
-    cygnus.append(sc.Spacecrafts("Cygnus", 2000, 18.9))
-    verne.append(sc.Spacecrafts("Verne", 2300, 13.1))
-    progress.append(sc.Spacecrafts("Progress", 2400, 7.6))
-    kounotori.append(sc.Spacecrafts("Kounotori", 5200, 14))
-    tianzhou.append(sc.Spacecrafts("TianZhou", 6500, 15))
-    dragon.append(sc.Spacecrafts("Dragon", 3400, 42))
+    cygnus.append(sc.Spacecrafts("Cygnus", 2000, 18.9, "USA"))
+    verne.append(sc.Spacecrafts("Verne", 2300, 13.1, "Europe"))
+    progress.append(sc.Spacecrafts("Progress", 2400, 7.6, "Russia"))
+    kounotori.append(sc.Spacecrafts("Kounotori", 5200, 14, "Japan"))
+    tianzhou.append(sc.Spacecrafts("TianZhou", 6500, 15, "China"))
+    dragon.append(sc.Spacecrafts("Dragon", 3400, 42, "USA"))
 
     # take biggest spacecrafts to fill
     spacecrafts = [tianzhou[cycle], dragon[cycle]]
@@ -215,6 +227,8 @@ for cycle in range(0, 100):
     print('Cargo left: ' + str(len(cargolist)))
     if len(cargolist) == 0:
         print('The total number of spacecrafts is: ' + str(number_of_sc))
+        print(str(used_spacecrafts.count("Cygnus")) + ' of Cygnus, ' + str(used_spacecrafts.count("Verne")) + ' of Verne, ' + str(used_spacecrafts.count("Progress")) + ' of Progress,')
+        print(str(used_spacecrafts.count("Kounotori")) + ' of Kounotori, ' + str(used_spacecrafts.count("TianZhou")) + ' of TianZhou, ' + str(used_spacecrafts.count("Dragon")) + ' of Dragon.')
         print('')
         break
 
@@ -229,6 +243,13 @@ for cycle in range(0, 100):
             last_weight += optimized[item][weight]
             last_space += optimized[item][space]
         spacecrafts = helpers.spacecrafts(last_weight, last_space, all_spacecrafts)
+
+    # remember all used spacecrafts
+    if len(spacecrafts) == 1:
+        used_spacecrafts.append(spacecrafts.sc_id)
+    else:
+        for craft in spacecrafts:
+            used_spacecrafts.append(craft.sc_id)
 
     # start bruteforce
     for bruteforce in range(0, speed):

@@ -1,10 +1,11 @@
 class Spacecrafts(object):
 
-    def __init__(self, sc_id, weight, volume):
+    def __init__(self, sc_id, weight, volume, country):
         self.sc_id =  sc_id
         self.weight = weight
         self.volume = volume
         self.density = weight/volume
+        self.country = country
         self.wastedweight = weight
         self.wastedspace = volume
         self.cargocount = 0
@@ -33,12 +34,3 @@ class Spacecrafts(object):
         self.wastedweight = self.weight
         self.wastedspace = self.volume
         self.cargolist = []
-
-    # def best_craft(self, craft, cargoratio):
-    #     diff = abs(self.density - (self.cargocount * self.meancargoratio + cargoratio) / (self.cargocount + 1)
-    #     return diff
-
-
-# moeten we hier nou die algoritmes ook in zetten? NEEEEEEE!!!!
-
-#    def load_spacecrafts(self, cargolist):
