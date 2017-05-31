@@ -171,6 +171,7 @@ for cargoloop in range(0,20):
             #print('Crafts used with best score: ' + str(bestscore_cargo))
     print('The following cargo has been packed:' + str(bestscore_cargo))
     print('')
+
     if len(cargolist) == 0:
-        print('The total number of used Spacecrafts is: ' + str((int(count_total_spacecrafts_per_country)-2) * 6 + len(spacecrafts)))
-        quit()
+        print('The total number of used Spacecrafts is: ' + str(int(count_total_spacecrafts_per_country)*5))
+        break
