@@ -1,6 +1,13 @@
 # Space Freight
 
-Load cargo into a spacecrafts
-NOG AANPASSEN
+Loading cargo into spaceships.
 
-Python 3.to-be-discovered
+In main.py you will find the nessecary functions to fill the spaceships using three algorithms: 
+
+- Greedy algorithm
+- Brute Force algorithm
+- Ranom Optimization algorithm
+
+
+
+Python 3.5, Atom 16.0
