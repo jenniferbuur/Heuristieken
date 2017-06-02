@@ -54,7 +54,7 @@ print('Wasted weight: ' + str(solution[0]) + ', Wasted space: ' + str(solution[1
 
 # # partly brute force on shortened cargolist
 optimized = helpers.optimize(cargolist, spacecrafts)
-bestscore = 10000, bestsolution = []
+bestscore = 10000; bestsolution = []
 
 for bruteforce in range(0, 100000):
     randomlist = optimized.keys()
